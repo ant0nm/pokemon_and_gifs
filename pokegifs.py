@@ -1,6 +1,9 @@
 import json
 import requests
+import os
 
+# Pokemon API
+print("Pokemon API:")
 base_path = "http://pokeapi.co/api/v2/"
 name_token = "pokemon"
 type_token = "type"
@@ -32,3 +35,19 @@ print()
 print("All pokemons of type fire:")
 for pokemon in body3["pokemon"]:
     print("*", pokemon["pokemon"]["name"])
+
+# GIPHY API
+print()
+print("GIPHY API:")
+giphy_key = os.environ.get("GIPHY_KEY")
+url = f"https://api.giphy.com/v1/gifs/search?api_key={giphy_key}&q=pikachu&rating=g"
+response4 = requests.get(url)
+body4 = json.loads(response4.content)
+all_gifs = body4["data"]
+for gif in all_gifs:
+    print(gif["url"])
+
+print()
+print("Ketchup + Pikachu GIF:")
+pikachu_ketchup_gif = all_gifs[18]["url"]
+print(pikachu_ketchup_gif)
